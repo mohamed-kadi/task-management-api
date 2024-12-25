@@ -50,6 +50,17 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
    ├── pom.xml
    └── README.md
    ```
+   src/main/java/com/example/taskmanagement/
+   ├── models/
+   │   └── Task.java
+   ├── repositories/
+   │   └── TaskRepository.java
+   ├── services/
+   │   ├── TaskService.java
+   │   └── TaskServiceImpl.java
+   └── controllers/
+   └── TaskController.java
+      ```
 
 ## Running the Application
 ```bash
@@ -59,10 +70,21 @@ The application will start on `http://localhost:8080`
 
 ## Development Progress
 - [x] Initial project setup
-- [ ] Basic CRUD operations for tasks
+- [x] Basic CRUD operations for tasks
+- [x] Task search functionality
+- [x] Status filtering
 - [ ] User authentication
 - [ ] Task categories and labels
 - [ ] API documentation
+
+## API Endpoints
+- GET /api/tasks - Get all tasks
+- GET /api/tasks/{id} - Get task by ID
+- POST /api/tasks - Create new task
+- PUT /api/tasks/{id} - Update task
+- DELETE /api/tasks/{id} - Delete task
+- GET /api/tasks/status/{status} - Get tasks by status
+- GET /api/tasks/search?keyword={keyword} - Search tasks
 
 ## Contributing
 1. Create a feature branch (`git checkout -b feature/amazing-feature`)
