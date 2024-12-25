@@ -38,18 +38,6 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
 
 3. **Project Structure**
    ```
-   task-management-api/
-   ├── src/
-   │   ├── main/
-   │   │   ├── java/
-   │   │   │   └── com/example/taskmanagement/
-   │   │   └── resources/
-   │   └── test/
-   │       └── java/
-   ├── .gitignore
-   ├── pom.xml
-   └── README.md
-   ```
    src/main/java/com/example/taskmanagement/
    ├── models/
    │   └── Task.java
@@ -60,11 +48,11 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
    │   └── TaskServiceImpl.java
    └── controllers/
    └── TaskController.java
-      ```
+   ```
 
 ## Running the Application
 ```bash
-mvn spring-boot:run
+mvnspring-boot:run
 ```
 The application will start on `http://localhost:8080`
 
