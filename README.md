@@ -18,6 +18,7 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
 - **Spring Data JPA**: Simplifies database operations using Java Persistence API
 - **H2 Database**: Lightweight, in-memory database ideal for development
 - **Lombok**: Java library that automatically plugs into your editor to reduce boilerplate code
+- **SpringDoc OpenAPI**: Provides Swagger documentation for the API
 
 ## Project Setup
 1. **Prerequisites**
@@ -39,6 +40,8 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
 3. **Project Structure**
    ```
    src/main/java/com/example/taskmanagement/
+   ├── config/
+   │   └── SwaggerConfig.java
    ├── models/
    │   └── Task.java
    ├── repositories/
@@ -48,7 +51,7 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
    │   └── TaskServiceImpl.java
    └── controllers/
    └── TaskController.java
-   ```
+      ```
 
 ## Running the Application
 ```bash
@@ -56,14 +59,7 @@ mvnspring-boot:run
 ```
 The application will start on `http://localhost:8080`
 
-## Development Progress
-- [x] Initial project setup
-- [x] Basic CRUD operations for tasks
-- [x] Task search functionality
-- [x] Status filtering
-- [ ] User authentication
-- [ ] Task categories and labels
-- [ ] API documentation
+## API Documentation and Testing
 
 ## API Endpoints
 - GET /api/tasks - Get all tasks
@@ -73,6 +69,52 @@ The application will start on `http://localhost:8080`
 - DELETE /api/tasks/{id} - Delete task
 - GET /api/tasks/status/{status} - Get tasks by status
 - GET /api/tasks/search?keyword={keyword} - Search tasks
+
+### Swagger UI Documentation
+When the application is running locally, you can access:
+- Interactive API documentation: `http://localhost:8080/swagger-ui.html`
+- Raw API documentation: `http://localhost:8080/api-docs`
+
+### Testing with Postman
+1. Download the Postman collection: `Task-Management-API.postman_collection.json`
+2. Import the collection into Postman
+3. Test endpoints with pre-configured requests
+
+### Example API Requests
+
+#### Create Task
+```http
+POST /api/tasks
+Content-Type: application/json
+
+{
+    "title": "Learn Spring Boot",
+    "description": "Complete the tutorial",
+    "status": "PENDING"
+}
+ ```
+#### Update Task
+```http
+PUT /api/tasks/1
+Content-Type: application/json
+
+{
+   "title": "Learn Spring Boot",
+   "description": "Tutorial completed!",
+   "status": "IN_PROGRESS"
+}
+```
+
+## Development Progress
+- [x] Initial project setup
+- [x] Basic CRUD operations for tasks
+- [x] Task search functionality
+- [x] Status filtering
+- [x] Swagger API documentation
+- [x] Postman collection
+- [ ] Database configuration
+- [ ] User authentication
+- [ ] Task categories and labels
 
 ## Contributing
 1. Create a feature branch (`git checkout -b feature/amazing-feature`)

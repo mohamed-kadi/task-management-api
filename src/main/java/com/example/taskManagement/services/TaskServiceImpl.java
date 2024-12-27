@@ -98,7 +98,7 @@ public class TaskServiceImpl implements TaskService {
 
     //helper method for validation 
     private void validateStatus(String status) {
-        List<String> validStatus = List.of("PENDING", "IN_PROCESS", "COMPLETED");
+        List<String> validStatus = List.of("PENDING", "IN_PROGRESS", "COMPLETED");
         if(!validStatus.contains(status))
             throw new IllegalArgumentException("Invalid status " + status);
 
