@@ -30,7 +30,7 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
 2. **Initialize Project**
    ```bash
    # Clone the repository
-   git clone [repository-url]
+   git clone https://github.com/mohamed-kadi/task-management-api.git
    cd task-management-api
    
    # Build the project
@@ -55,7 +55,7 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
 
 ## Running the Application
 ```bash
-mvnspring-boot:run
+mvn spring-boot:run
 ```
 The application will start on `http://localhost:8080`
 
@@ -104,6 +104,63 @@ Content-Type: application/json
    "status": "IN_PROGRESS"
 }
 ```
+## Database Configuration
+
+The application supports two database configurations:
+
+### In-Memory Database (Development/Testing)
+```properties
+```
+# Database Configuration
+spring.datasource.url=jdbc:h2:mem:taskdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+# JPA Configuration
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+# H2 Console
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+* Data is temporary and resets when application restarts
+* Perfect for development and testing
+* Access H2 Console at: http://localhost:8080/h2-console
+
+### Persistent Database (Local Development)
+```properties
+```
+# Database Configuration
+spring.datasource.url=jdbc:h2:file:./data/taskdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+# JPA Configuration
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+# H2 Console
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+* Data persists after application restart
+* Stored in ./data/taskdb files
+* Suitable for local development with data persistence
+
+### Using H2 Console
+
+1. Start the application
+2. Go to http://localhost:8080/h2-console
+3. Enter credentials:
+   - JDBC URL: (use either memory or file URL as configured)
+   - Username: sa
+   - Password: (leave empty)
+4. Click "Connect"
 
 ## Development Progress
 - [x] Initial project setup
@@ -112,7 +169,7 @@ Content-Type: application/json
 - [x] Status filtering
 - [x] Swagger API documentation
 - [x] Postman collection
-- [ ] Database configuration
+- [x] Database configuration
 - [ ] User authentication
 - [ ] Task categories and labels
 
