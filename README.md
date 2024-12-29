@@ -110,7 +110,7 @@ The application supports two database configurations:
 
 ### In-Memory Database (Development/Testing)
 ```properties
-```
+
 # Database Configuration
 spring.datasource.url=jdbc:h2:mem:taskdb
 spring.datasource.driverClassName=org.h2.Driver
@@ -125,14 +125,14 @@ spring.jpa.show-sql=true
 # H2 Console
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
-
+```
 * Data is temporary and resets when application restarts
 * Perfect for development and testing
 * Access H2 Console at: http://localhost:8080/h2-console
 
 ### Persistent Database (Local Development)
 ```properties
-```
+
 # Database Configuration
 spring.datasource.url=jdbc:h2:file:./data/taskdb
 spring.datasource.driverClassName=org.h2.Driver
@@ -147,7 +147,7 @@ spring.jpa.show-sql=true
 # H2 Console
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
-
+```
 * Data persists after application restart
 * Stored in ./data/taskdb files
 * Suitable for local development with data persistence
