@@ -15,9 +15,13 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String title;
+
     private String description;
-    private String status = "PENDING";  // pending , in process , completed
+
+    private String status = "PENDING"; // PENDING, IN_PROGRESS, COMPLETED
+    
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 

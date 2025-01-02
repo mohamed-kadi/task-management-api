@@ -20,12 +20,21 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
 - **Lombok**: Java library that automatically plugs into your editor to reduce boilerplate code
 - **SpringDoc OpenAPI**: Provides Swagger documentation for the API
 
+## Features
+- User registration and authentication
+- JWT based security
+- CRUD operations for tasks
+- Search and filter tasks
+- H2 Database Console access
+- Protected endpoints
+
 ## Project Setup
 1. **Prerequisites**
    - Java JDK 17 or higher
    - Maven 3.x
    - Git
    - IDE (VS Code)
+   - Swagger & Postman (for testing)
 
 2. **Initialize Project**
    ```bash
@@ -38,19 +47,26 @@ A RESTful API built with Spring Boot for managing tasks and todo items. This pro
    ```
 
 3. **Project Structure**
-   ```
+   ``` 
    src/main/java/com/example/taskmanagement/
    ├── config/
-   │   └── SwaggerConfig.java
+   │   └── SecurityConfig.java
+   ├── controllers/
+   │   ├── AuthController.java
+   │   └── TaskController.java
    ├── models/
-   │   └── Task.java
+   │   ├── User.java
+   │   ├── Task.java
+   │   └── Role.java
    ├── repositories/
+   │   ├── UserRepository.java
    │   └── TaskRepository.java
-   ├── services/
-   │   ├── TaskService.java
-   │   └── TaskServiceImpl.java
-   └── controllers/
-   └── TaskController.java
+   ├── security/
+   │   ├── JwtTokenProvider.java
+   │   ├── JwtAuthenticationFilter.java
+   │   └── CustomUserDetailsService.java
+   └── services/
+   └── TaskService.java
       ```
 
 ## Running the Application
@@ -104,6 +120,70 @@ Content-Type: application/json
    "status": "IN_PROGRESS"
 }
 ```
+### Authentication Endpoints
+
+#### Register User
+```http
+POST /api/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "test123"
+}
+```
+#### Login User
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "test123"
+}
+```
+Response:
+```json
+{
+    "token": "eyJhbGciOiJIUzI1...",
+    "type": "Bearer"
+}
+```
+### Security Configuration
+#### JWT Configuration
+Add to application.properties:
+```properties
+# JWT Properties
+app.jwtSecret=af3c1a2b3d4e5f6789abcdef01234567890bcdef
+app.jwtExpirationInMs=86400000
+```
+#### Using JWT Token
+All task endpoints require Authentication token in header:
+```auth
+Authorization: Bearer your-jwt-token
+```
+#### Token Expiration
+
+Tokens expire after configured time (default 24 hours)
+Expired tokens will return 401 Unauthorized
+Login again to get new token
+
+#### Error Handling
+
+- 400: Bad Request (Invalid input)
+- 401: Unauthorized (Invalid/expired token)
+- 403: Forbidden (Insufficient permissions)
+- 404: Not Found
+- 500: Internal Server Error
+
+#### Testing Authentication Flow
+
+1. Register new user using /api/auth/register
+2. Login with credentials to get JWT token
+3. Add token to request headers for all task endpoints
+4. Test token expiration (default 24h)
+
 ## Database Configuration
 
 The application supports two database configurations:
@@ -170,7 +250,7 @@ spring.h2.console.path=/h2-console
 - [x] Swagger API documentation
 - [x] Postman collection
 - [x] Database configuration
-- [ ] User authentication
+- [x] User authentication    <!--Updated-->
 - [ ] Task categories and labels
 
 ## Contributing
