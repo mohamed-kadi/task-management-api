@@ -22,7 +22,8 @@ public class TaskServiceImpl implements TaskService {
         
         if (task.getTitle() == null || task.getTitle().trim().isEmpty())
             throw new IllegalArgumentException("Task title is required");
-
+            // System.out.println("Title is missing, but proceeding...");
+       
         task.setStatus("PENDING");
         task.setCreatedAt(LocalDateTime.now());
         task.setUpdatedAt(LocalDateTime.now());
